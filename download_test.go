@@ -12,7 +12,6 @@ import (
 	"encoding/xml"
 	"errors"
 	"fmt"
-	"github.com/google/go-cmp/cmp"
 	"io"
 	"io/ioutil"
 	"log"
@@ -20,6 +19,8 @@ import (
 	"net/http/httptest"
 	"os"
 	"testing"
+
+	"github.com/google/go-cmp/cmp"
 )
 
 var opened bool
@@ -177,7 +178,7 @@ func TestDownloadLatest(t *testing.T) {
 				if info, err := os.Stat(targetName); err != nil {
 					t.Fatalf("missing file: %v", err)
 				} else if fmt.Sprintf("%#o", info.Mode().Perm()) != "0755" {
-					t.Fatalf("wrong file permission: %v", err)
+					t.Fatalf("wrong file permission (%#o != 0755): %v", info.Mode().Perm(), err)
 				}
 
 				if buf, err := ioutil.ReadFile(targetName); err != nil {
