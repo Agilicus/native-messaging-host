@@ -22,7 +22,7 @@ func (h *Host) getTargetNames() ([]string, error) {
 	targets := []string{}
 	if os.Getuid() != 0 {
 		homeDir, _ := os.UserHomeDir()
-		matches, err := filepath.Glob(homeDir + "/Library/Application Support/Google/Chrome/NativeMessagingHosts")
+		matches, err := filepath.Glob(homeDir + "/Library/Application Support/Google/*/NativeMessagingHosts")
 		if err != nil {
 			return nil, err
 		}
